@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Github API Project</title> 
+        
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="page-header"></div>
+            <div class="page-main">
+                <div class="logo-img"><img src="./images/github-6-128.png"></div>
+                <h1 class="text-center mt-5">Github API</h1>
+                <div class="img"></div>
+                <form id="gitHubForm" class="form-inline mx-auto" style="width: 280px">
+                    <input id="usernameInput" class="form-control mb-5" type="text" name="username" placeholder="Github Username" value="" required>
+                    <input type="submit" class="btn btn-primary ml-2 mb-5" value="Submit">
+                </form>
+                
+                <ul id="userRepos" class="list-group mx-auto mb-5" style="width: 500px">
+                
+                </ul>
+            </div>
+            <div class="page-footer"></div>
+        </div>
+        <script src=callbacks.js></script>
+    </body>
+</html>

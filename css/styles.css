@@ -1,0 +1,86 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body {
+	/*formatting text*/
+	font-size: 85%;
+    font-family: "Montserrat", Georgia, serif;
+    color: #f2f2f2;
+
+	line-height: 2;
+
+	background-color: #061621;
+}
+/*
+===============================================================================
+Wrapper styling
+*/
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.page-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;	/*horizontally justified center*/
+    justify-content: center;
+    flex-grow: 1;
+}
+/*
+===============================================================================
+Header styling
+*/
+/*headings*/
+h1 {
+   font-family: Georgia, serif;
+   font-size: 2em;
+   letter-spacing: 4px; 
+   word-spacing: 15px;
+   color: #f2f2f2;
+   text-shadow: .1em .1em .7em #291a0b; /*text-shadow: horizontal_offset vertical_offset blur_radius color*/
+   text-align: center;
+   margin-bottom: 0; 
+}
+/*
+===============================================================================
+Button styling
+*/
+input {
+    padding: 5px 8px;
+    margin: 5px 0;
+    border-radius: 6px;
+    border: none;
+}
+input[type='submit'] {
+    cursor: pointer;
+    background-color: rgba(150, 144, 138, 0.5);
+}
+input[type='submit']:hover {
+    background-color:rgba(150, 144, 138, 1);
+}
+/*
+===============================================================================
+List styling
+*/
+li {
+    display: block;
+    padding: 10px;
+    overflow: hidden;
+    border-bottom: rgba(242, 242, 242, 0.1) dashed 1px;
+}
+
+div img{
+    display: block;
+    margin: 15px auto 15px auto;
+    border-radius: 50%;
+}
+a {
+    text-decoration: none;
+}
+/*
+===============================================================================
+Page footer styling
+*/

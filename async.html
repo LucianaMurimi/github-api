@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Async JS</title>
+    </head>
+    <body>
+
+    </body>
+    <script>
+        //Example:
+        //using Promises to validate password
+        let password = 'luci';
+
+        let p = new Promise((resolve, reject) => {
+            if(password !== 'luciana'){
+                reject('Invalid Password');
+            }
+            resolve('Corrrect Password')
+        });
+        p.then(res => console.log(`then: ${res}`)); 
+        p.catch(err => console.log(`catch: ${err}`));
+        p.finally(() => console.log('Finally!'));
+
+    </script>
+</html>
