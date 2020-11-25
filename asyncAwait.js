@@ -4,7 +4,7 @@ let userReposUL = document.querySelector('#userRepos');
 let userImage = document.querySelector('.img');
 let logoImage = document.querySelector('.logo-img')
 
-function removeChildNodes() {
+let removeChildNodes = () => {
     //childNodes to be removed -> userImage, userReposUL
     if(userImage.hasChildNodes()){
         userImage.removeChild(userImage.firstChild);
@@ -16,28 +16,33 @@ function removeChildNodes() {
     }
 }
 
-function getUserData(URL, callback) {
-    //1. creating a new XMLHttpRequest object
-    const xhr = new XMLHttpRequest();
+let getUserData = (URL) => {
+    return new Promise((resolve, reject) => {
+        //1. creating a new XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
 
-    //2. defining Github API endpoint
-    const url = URL;
+        //2. defining Github API endpoint
+        const url = URL;
 
-    //3. opening a new connection
-    xhr.open('GET', url, true);
+        //3. opening a new connection
+        xhr.open('GET', url, true);
 
-    //4. on receiving request, process it here:
-    xhr.onload = function() {
-        //parse API data ito JSON
-        const data = JSON.parse(this.response);
-        return callback(data);
-    }
+        //4. on receiving request, process it here:
+        xhr.onload = function() {
+            //parse API data ito JSON
+            const data = JSON.parse(this.response);
+            resolve(data);
+        }
 
-    //5. sending the request
-    xhr.send();
+        //5. on error reject
+        xhr.onerror = () => reject(xhr.statusText);
+
+        //6. sending the request
+        xhr.send();
+    });
 }
 
-function updateUserImgUI (data, callback) {
+let updateUserImgUI = (data) => {
     if(logoImage.hasChildNodes()){
         logoImage.removeChild(logoImage.firstChild);
     }
@@ -46,10 +51,9 @@ function updateUserImgUI (data, callback) {
     img.setAttribute('src', `${data.avatar_url}`);
     img.setAttribute('style', `height: 150px;width: 150px`);
     userImage.append(img);
-
-    callback();
 }
-function updateUserReposUI (data) {
+
+let updateUserReposUI = (data) => {
     for(let i in data){
         let li = document.createElement('li');
         li.innerHTML = (`
@@ -61,7 +65,6 @@ function updateUserReposUI (data) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     //1. Get the Github username input form 
     const githubForm = document.getElementById('gitHubForm');
@@ -72,15 +75,25 @@ document.addEventListener('DOMContentLoaded', () => {
         let username = document.getElementById('usernameInput').value;
 
         if(username !== ''){
-            removeChildNodes();  
-            
-            getUserData(`https://api.github.com/users/${username}`, (data1) => {
-                updateUserImgUI(data1, () => {
-                    getUserData(`https://api.github.com/users/${username}/repos`, updateUserReposUI);
-                });
-            });  
+            removeChildNodes(); 
+
+            async function user(){
+                try {
+                    let userImgData = await getUserData(`https://api.github.com/users/${username}`);
+                    let updateUserImg = await updateUserImgUI(userImgData);
+                    let userRepoData = await getUserData(`https://api.github.com/users/${username}/repos`);
+                    let updateUserRepo = await updateUserReposUI(userRepoData);
+                }
+                catch(err){
+                    console.log(err);
+                }
+            }
+
+            user();
         } 
     });
 
     
 });
+
+
